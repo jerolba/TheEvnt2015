@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="es">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Extensiones everywhere</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		
+		<style>
+			.browser-logo{
+				width:150px;
+				border-color: rgb(255, 255, 255) !important; 
+				border-style: none !important;
+				border-width: 0px !important;
+				background-color: rgba(255, 255, 255, 0) !important;
+			}
+			
+			
+			.cross-extension{
+				border-color: rgb(255, 255, 255) !important; 
+				border-style: none !important;
+				border-width: 0px !important;
+				background-color: rgba(255, 255, 255, 0) !important;
+				margin: 0 !important;
+			}
+			
+			.other-logo{
+				margin-right: 20px !important; 
+				border-color: rgb(255, 255, 255) !important; 
+				border-style: none !important;
+				border-width: 0px !important;
+				background-color: rgba(255, 255, 255, 0) !important;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<span style="position: fixed;bottom: 10px;left:20px;" ><img src="img/logo-otogami-logo.png"/><span style="font-size:0.6em;vertical-align: middle;"> Extensiones everywhere </span></span>
+			<span style="position: fixed;top: 10px;right:10px;" ><img src="img/TheEvnt-logo.png"/></span>
+			
+		
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<img src="img/TheEvnt.jpg"/>
+					<h2>Extensiones everywhere</h2>
+					<h3>Seminarios theEvnt</h3>
+					<p>
+						<small><a href="http://www.twitter.com/jerolba">Jerónimo López Bezanilla</a> / <a href="http://twitter.com/jerolba">@jerolba</a></small>
+					</p>
+				</section>
+				<section>
+					<h1>Índice</h1>
+					<ul>
+						<li>Introducción</li>
+						<li>Repaso de navegadores</li>
+						<li>¿Qué se puede hacer?</li>
+						<li>Herramientas</li>
+						<li>Arquitectura</li>
+						<li>Código a saco</li>
+						<li>Publicación</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Disclaimer</h2>
+					<p>No vengo a hablar de mi libro, pero pido perdón si hablo mucho de <a href="http://powerup.otogami.com/" target="_blank">PowerUp</a>.</p>
+					<p><img src="img/otogami-powerup-logo.png"/></p>
+				</section>
+				
+				<section>
+					<h2>¿Qué es una extensión?</h2>
+				</section>
+				
+				<section>
+					<img src="./img/chrome-logo.png" class="browser-logo"/>						
+					<img src="./img/ff-logo.png" class="browser-logo fragment"/>						
+					<img src="./img/safari-logo.png" class="browser-logo fragment"/>	
+					<img src="./img/opera-logo.png" class="browser-logo fragment"/>	
+					<img src="./img/explorer-logo.png" class="browser-logo fragment"/>	
+				</section>
+
+				<section>
+					<h2>Más relevantes</h2>
+					<img src="./img/chrome-logo.png" class="browser-logo"/>						
+					<img src="./img/ff-logo.png" class="browser-logo"/>						
+					<img src="./img/safari-logo.png" class="browser-logo"/>	
+				</section>
+
+				<section>
+						<h2><img src="./img/chrome-logo.png" class="browser-logo"/>	</h2>
+						<ul>
+							<li><a href="https://developer.chrome.com/extensions/index">Excelente documentación</a></li>
+							<li><a href="https://developer.chrome.com/extensions/samples">Buenos ejemplos</a></li>
+							<li>Fácil de debugear (Developer Tools)</li>
+							<li>Buen ciclo de desarrollo</li>
+						</ul>
+				</section>
+				<section>
+						<h2><img src="./img/ff-logo.png" class="browser-logo"/>	</h2>
+						<ul>
+							<li><a href="https://developer.mozilla.org/en-US/Add-ons">Documentación dura</a>, <a href="https://blog.mozilla.org/addons/2014/06/05/how-to-develop-firefox-extension/"> *</a></li>
+							<li>No encontré ejemplos</li>
+							<li>Fácil de debugear (Firebug)</li>
+							<li>Ciclo de desarrollo incómodo</li>
+						</ul>
+				</section>
+				<section>
+					<section>
+							<h2><img src="./img/safari-logo.png" class="browser-logo"/>	</h2>
+							<ul>
+								<li><a href="https://developer.apple.com/library/safari/documentation/Tools/Conceptual/SafariExtensionGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009977-CH1-SW1">Documentación buena</a></li>
+								<li>No encontré ejemplos</li>
+								<li>Fácil de debugear (Web Inspector)</li>
+								<li>Ciclo de desarrollo ?</li>
+							</ul>
+					</section>
+					<section>
+						<img src="./img/SafariDeveloperProgram.png"/>
+					</section>
+				</section>
+				<section>
+						<h2>¿No hay un estandar?</h2>
+						<p class="fragment" style="font-size:3em;">NO</p>
+						<ul class="fragment">
+							<li><a href="http://kangoextensions.com/"><img class="cross-extension" style="width:227px;" src="./img/kangoo-extensions.png"/></a></li>
+							<li><a href="http://crossrider.com/developer/main"><img class="cross-extension" style="width:100%;" src="./img/crossrider.png"/></a></li>
+							<li><a href="http://www.firebreath.org/display/documentation/FireBreath+Home"><img class="cross-extension" style="width:50px;" src="./img/firebreath.png"/> FireBreath</a></li>
+						</ul>						
+				</section>
+				<section>				
+					<section>
+							<h2>¿Y qué cosas puedo hacer en una extensión?</h2>						
+							<img class="fragment" src="./img/everywhere.jpg"/>
+					</section>
+					<section>
+							<h2>Añadir una acción a la página</h2>
+							<img src="./img/page-action.png"/>
+					</section>					
+					<section>
+							<h2>Añadir una acción al navegador</h2>
+							<img src="./img/browser-action-with-popup.png"/>
+					</section>
+					<section>
+							<h2>Sacar un popup</h2>
+							<img src="./img/page-action-popup.png"/>
+					</section>
+					<section>
+							<h2>Omnibox</h2>
+							<img src="./img/omnibox.png"/>
+					</section>					
+					<section>
+							<h2>Configuración</h2>
+							<img src="./img/options-ui.png"/>
+					</section>	
+					<section>
+							<h3>Sobreescribir páginas</h3>
+							<ul>
+								<li>Gestión de bookmars</li>
+								<li>Gestión historial</li>
+								<li>Nueva pestaña</li>								
+							</ul>						
+					</section>
+					<section>
+							<h3>Modificar...</h3>
+							<ul>								
+								<li>.. bookmarks</li>
+								<li>.. historial</li>
+								<li>.. cookies</li>
+								<li>Añadir opciones al menú contextual</li>								
+							</ul>
+					</section>					
+					<section>
+							<h3>Modificar comportamiento</h3>
+							<ul>
+								<li>Ejecutar scripts en background</li>
+								<li>Inyectar Scripts en cualquier página</li>
+								<li>Inyectar CSS en cualquier página</li>
+								<li>Reaccionar a la carga de cualquier url</li>								
+								<li>Interceptar cualquier peticion</li>
+								<li>Cargar/cerrar tabs</li>
+							</ul>
+					</section>
+				</section>
+				<section>
+						<h2>Herramientas</h2>
+						<ul>
+							<li>El navegador :)</li>
+							<li>Tu editor de textos preferido</li>
+							<li>En Firefox: <a href="https://developer.mozilla.org/en-US/Add-ons/SDK">Add-on SDK</a></li>
+						</ul>
+				</section>				
+				<section>
+						<h2>¿Y esto con qué lo programo?</h2>
+						<img class="fragment" src="./img/js-logo.jpg"/>
+				</section>
+				<section>
+					<section>
+							<h2>Qué putada! No?</h2>
+							<img class="fragment" src="./img/js-rant.jpg" style="max-width:400px;"/>
+					</section>
+					<section>
+							<h2>WAT</h2>
+							<img src="./img/wat.png"/>
+							<p><a href="https://www.destroyallsoftware.com/talks/wat"> Gary Bernhardt, CodeMash 2012</a></p>
+					</section>
+				</section>
+				<section>
+						<h2>¿y no puedo usar otra cosa?</h2>
+						<p class="fragment">
+						<img class="other-logo" src="./img/coffeescript-logo.png" style="max-width:250px;"/> 
+						<img class="other-logo" src="./img/typescript-logo.png" style="max-width:190px;"/>
+						</p>
+						<p class="fragment">
+						<img class="other-logo" src="./img/grooscript.png" style="max-width:250px;"/> 
+						<img class="other-logo" src="./img/dart-logo.png" style="max-width:130px;"/>
+						</p>
+				</section>
+				<section>
+						<h2>En cualquier caso</h2>
+						<img src="./img/js_good_parts.png" style="max-width:500px;"/>
+				</section>				
+				<section>
+						<h2>¿Y qué framework JS utilizo?</h2>
+						<p>...porque me han dicho que Ember y Angular lo petan.</p>
+						<p class="fragment" style="font-size:2em;">El que quieras!</p>
+						<p class="fragment">Pero que no haga cosas raras :(</p>
+						<a class="fragment" href="https://developer.chrome.com/extensions/contentSecurityPolicy">https://developer.chrome.com/extensions/contentSecurityPolicy</a>
+						<a class="fragment" href="https://www.youtube.com/watch?v=Bxg-5C3F8qo">Chrome Extension using AngularJS</a>
+				</section>
+				<section>
+						<h2>Arquitectura de una extensión</h2>
+				</section>
+				<section>
+					<section>
+							<h2>Página de "Background"</h2>
+							<img src="./img/background.gif" class="other-logo" style="width:450px;"/>
+					</section>
+					<section>
+							<h2>Página de "Background"</h2>
+							<ul>
+								<li>Aunque se llama página solo carga ficheros .js</li>
+								<li>Si no la creas se autogenera a partir del JS principal</li>
+								<li>Se ejecuta permanente en background</li>
+								<li>No interactúa con el contenido del navegador</li>
+							</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+							<h2>Página de "UI"</h2>
+							<img src="./img/ui-page.gif" class="other-logo" style="width:450px;"/>
+					</section>
+					<section>
+							<h2>Página de "UI"</h2>
+							<ul>
+								<li>Páginas "virtuales" abiertas en una pestaña</li>
+								<img src="./img/tag-page.png"/>
+								<li>Página de preferencias de la extensión</li>
+								<img src="./img/settings-page.png"/>
+							</ul>
+					</section>
+					<section>
+							<h2>Página de "UI"</h2>
+							<ul>
+								<li>Página de gestión de bookmars, nueva pestaña, etc</li>
+								<img src="./img/bookmarks-page.png"/>
+								<li>El popup asociado a un botón de la barra o de la página</li>
+								<img src="./img/browser-page.png"/>
+							</ul>
+					</section>
+					
+					<section>
+							<h2>Página de "UI"</h2>
+							<ul>
+								<li>Muestra el HTML que queramos...</li>
+								<li>...con TODO lo que necesitemos:</li>
+								<ul>
+									<li>HTML</li>
+									<li>CSS</li>
+									<li>JS</li>
+								</ul>								
+								<li>Podemos meter los frameworks CSS y JS que queramos</li>
+								<li>Podemos hacer las llamadas ajax que queramos</li>
+								<li>Podemos acceder al DOM e invocar código de otras páginas UI y Background</li>
+							</ul>
+					</section>					
+				</section>		
+				<section>
+					<section>
+							<h2>Content scripts</h2>
+							<img src="./img/content-scripts.gif" class="other-logo" style="width:450px;"/>
+					</section>
+					<section>
+							<h2>Content scripts</h2>
+							<ul>
+								<li>Los encargados de interactuar con el contenido de las páginas</li>
+								<li>Se ejecuta en el contexto de la página cargada</li>
+								<li>Equivalente a haberla cargado la própia página</li>
+								<li>Pueden modificar el DOM</li>
+							</ul>
+					</section>
+					<section>
+							<h2>Content scripts</h2>
+							<ul>
+								<li>Están desacoplados de la extensión!</li>
+								<li>Pero se comunican por paso de mensajes</li>
+							</ul>
+							<img src="./img/content-script-comms.gif" class="other-logo" style="width:350px;"/>
+					</section>					
+				</section>		
+				<section>
+						<h2>Show me the code!</h2>
+						<p><img src="./img/chrome-logo.png" class="browser-logo"/></p>
+						<a href="http://bit.ly/jeroextension">http://bit.ly/jeroextension</a>
+				</section>
+				<section>
+						<h2>manifest.json</h2>
+						<pre>
+							<code data-trim>
+	{
+	  "name" : "Otogami PowerUp",
+	  "short_name" : "PowerUp",
+	  "version" : "0.0.16",
+	  "description" : "Compra tus videojuegos...",
+	  "icons": { 
+		    "16": "icon16.png",
+		    "48": "icon48.png",
+		    "128": "icon128.png" 
+		   },
+	  "background" : {
+		    "persistent": true,
+		    "scripts": ["background.js"]
+		   },
+	  "content_scripts" : [
+		{
+		    "matches" : [ 
+			   "http://*/*",
+			   "https://*/*"
+		    ],
+		    "js" : [ 
+			  "contentscript.js",
+			  "iframeResizer.js"
+		    ],
+		    "run_at" : "document_start",
+		    "all_frames" : false
+		}
+	  ],
+	  "permissions": [
+		    "webRequest", "*://*/*",
+		    "storage",
+		    "tabs"
+		   ],	  	  
+	  "manifest_version": 2
+	}
+							</code>
+						</pre>		
+				<a href="https://developer.chrome.com/extensions/declare_permissions">https://developer.chrome.com/extensions/declare_permissions</a>
+				</section>				
+				<section>
+					<h2>¡Mejor nos vamos al editor!</h2>
+				</section>
+				<section>
+					<h1>Distribución</h1>
+					<a href="https://chrome.google.com/webstore/detail/otogami-powerup/foklaimndklhjgodddiogfdpopbjmdnl"><img src="img/chromewebstore.png" class="other-logo"/></a>
+					<a href="https://addons.mozilla.org/es/firefox/addon/otogami-powerup/"><img src="img/AddonsFF.png" class="other-logo"/></a>					
+				</section>				
+				<section>
+					<h1>Publicación</h1>
+					<a href="https://chrome.google.com/webstore/developer/dashboard?authuser=0"><img src="./img/chrome-logo.png" class="browser-logo"/></a>
+					<a href="https://addons.mozilla.org/es/developers/addon/otogami-powerup/edit"><img src="./img/ff-logo.png" class="browser-logo"/></a>
+				</section>
+				<section>
+					<h1>Estadísticas</h1>
+					<a href="https://chrome.google.com/webstore/developer/stats/foklaimndklhjgodddiogfdpopbjmdnl?authuser=0"><img src="./img/chrome-logo.png" class="browser-logo"/></a>
+					<a href="https://addons.mozilla.org/es/firefox/addon/otogami-powerup/statistics/?last=30"><img src="./img/ff-logo.png" class="browser-logo"/></a>
+				</section>
+				<section>
+					<section>
+						<h2>¡Muchas gracias!</h2>
+						<img src="img/Kini.jpg" style="max-width:400px; margin-right:10px;"/><img src="img/Oyabun.jpg" style="max-width:400px;margin-left:10px;"/>
+					</section>
+					<section>
+						<h2>¡Muchas gracias!</h2>
+						<img src="img/tuenti-logo.png" class="other-logo"/>
+					</section>
+				</section>
+				<section>
+					<h1>Q&A</h1>
+					<p><a href="https://twitter.com/jerolba">@jerolba</a></p>
+					<p><a href="mailto:jeronimo@otogami.com">jeronimo@otogami.com</a></p>					
+				</section>
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

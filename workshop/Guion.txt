@@ -1,0 +1,101 @@
+El navegador:
+- Acceso a la pestaña de extensiones: Menu y chrome://extensions/
+- Activar el Modo desarrollador
+- Explicar las distintas opciones:
+ * Detalles
+ * Regarga
+ * Id con hash
+ * Path
+ * Página en segundo plano
+ 
+- Añadir una extensión nueva desde el disco
+- Inspeccionar el código:
+ * Acceder a página de background
+ * Acceder al código del contentscript
+ * Como se recarga el código back vs content
+ * console.log("Content script launched "+document.location);
+ 
+ ****** Crear una browser page ******
+ 
+ * Crear carpeta de popup
+ * Crear fichero de popup.html
+ 
+ <!DOCTYPE html>
+<html>
+	<head>
+        <title>Kini es el mejor!</title>
+		<style>
+				p {font-size: 3em;margin:0;}
+		</style>
+	</head>
+<body>
+<div style="width:400px; height:100px;">
+<p style=""><span>¡Kini es el mejor!</span></p>
+</div>
+</body>
+
+ * Anadir al manifest:
+ 
+  "browser_action":{
+	  "default_icon": {
+          "19": "icons/kini19.png",
+          "38": "icons/kini38.png"
+      },
+	  "default_title": "TheEvnt Button",
+	  "default_popup": "popup/popup.html"
+  },
+  
+  ***** Añadir comportamiento JS a la página *****
+  
+  <p style="visibility: hidden;" id="oyabun"><span>Y @oyabun También!</span></p>
+  <p><input type="button" id="boton" value="Cerrar" onClick="document.getElementById("oyabun").style.visibility = "visible";"/></p>
+  
+  * Mostrar el error de la consola
+  
+  * Crear el fichero script.js en popup y mover el código:
+  
+  document.getElementById("boton").addEventListener("click", close);
+  function close(){
+	document.getElementById("oyabun").style.visibility = "visible";
+  }
+  
+  ***** Hacer que el fondo de la página cambie a rojo *****
+  document.body.style.backgroundColor="red";
+  
+  * Dará error porque no tiene cargada todavía la página, cambiar el manifest:
+  "run_at" : "document_end",
+  
+  **** Cambiar los precios de Otogami.com ***** 
+  
+  * Crear método que mira primero si es de otogami y luego por los dos formatos de precio que tenemos, crear código que convierta
+  
+  
+  **** Hacer que el cambio esté en una página de configuración *****
+  
+  * Añadir la página de configuración al manifest:
+  
+  "options_page": "options/options.html",
+  
+  *Creamos la página options.html con dos campos y añadimos Jquery
+  
+  **** Hacer que los precios los coja de la configuración *****
+  
+  * Crear el listener que detecte la carga con otogami, cargue el change y mande mensaje a contentscript
+  * Refactorizar contentscript para que reciba el mensaje con el precio
+  * Refactorizar para que cuente los cambios y los devuelva en el mensaje
+  
+  
+  *************** FIREFOX ****************
+  set PATH=%PATH%;C:\Python27
+  set PATH=%PATH%;C:\programas\mozilla-addon-sdk-1.17\bin;
+  
+  * Crear extension: En carpeta ya creada ejecutar cfx init
+  * Modificar el lib/main.js  ->  console.log("Iniciando background");
+  * Ejecutar: cfx run
+  * Explicar como llegar al debuger
+  * Añadir otro log: console.log("Hola chicos");
+  * Intentar ver el cambio actualizado.... 
+  * .... tener que volver a hacer el cfx run
+  * Enseñar los ejemplos de la página https://developer.mozilla.org/en-US/Add-ons/SDK/Tutorials/Getting_started con el tema de los requires
+  * Se empaqueta con cfx xpi
+  
